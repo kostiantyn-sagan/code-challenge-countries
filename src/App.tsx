@@ -1,24 +1,22 @@
-import React from "react";
-import { Container } from "@mui/material";
+import React, { Suspense } from "react";
+import { Switch, Route } from "react-router-dom";
+import FallbackLoader from "./components/FallbackLoader";
+import Navigation from "./components/Navigation";
 
 function App() {
   return (
     <div>
-      <header>
-        <Container>
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </Container>
-      </header>
+      <Navigation />
+      <Suspense fallback={<FallbackLoader />}>
+        <Switch>
+          <Route path="/" exact>
+            <h1>It`s Home Page</h1>
+          </Route>
+          <Route path="/detail">
+            <h1>It`s Detail Page</h1>
+          </Route>
+        </Switch>
+      </Suspense>
     </div>
   );
 }
