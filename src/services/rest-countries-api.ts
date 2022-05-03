@@ -8,5 +8,5 @@ async function fetchWithErrorHandling(url = "", config = {}) {
 }
 
 export function fetchAll() {
-  return fetchWithErrorHandling();
+  return fetchWithErrorHandling(`${BASE_URL}/all`);
 }
