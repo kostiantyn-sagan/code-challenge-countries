@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Container } from "@mui/material";
 import Loader from "react-loader-spinner";
 import * as restCountriesAPI from "../services/rest-countries-api";
@@ -13,7 +14,9 @@ const Status = {
   REJECTED: "rejected",
 };
 
-export default function HomePage() {
+export default function DetailPage() {
+  const location = useLocation();
+  console.log(location);
   const [countries, setCountries] = useState([]);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
@@ -37,6 +40,7 @@ export default function HomePage() {
 
   return (
     <section>
+      <h1>It`s Detail Page</h1>
       <Container>
         <SearchInput onSubmit={setSearchQuery} />
         <FilterByRegion setSelectedRegion={setSelectedRegion} />

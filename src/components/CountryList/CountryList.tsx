@@ -1,21 +1,13 @@
 import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
   Box,
-  Paper,
   Grid,
   Card,
   CardContent,
   CardMedia,
   Typography,
-  CardActionArea,
-  CardActions,
-  Button,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 
 // Types
 type Country = {
@@ -26,18 +18,12 @@ type Country = {
   name: {
     common: string;
   };
+  region: string;
+  capital: Array<string>;
 };
 type PropTypes = {
   countries: Array<Country>;
 };
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 const CountryList: FC<PropTypes> = ({ countries }) => {
   const location = useLocation();
@@ -47,23 +33,35 @@ const CountryList: FC<PropTypes> = ({ countries }) => {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           {countries.map((country) => (
-            <Grid item xs={3} key={country.population}>
-              <Link to={{ pathname: "/detail", state: { from: location } }}>
+            <Grid item xs={3} key={country.name.common}>
+              <Link
+                to={{
+                  pathname: "/detail",
+                  state: { from: location },
+                }}
+              >
                 <Card sx={{ maxWidth: 345 }}>
                   <CardMedia
                     component="img"
-                    height="140"
+                    height="168"
                     image={country.flags.png}
-                    alt="green iguana"
+                    alt={country.name.common}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      Lizard
+                      {country.name.common}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Lizards are a widespread group of squamate reptiles, with
-                      over 6,000 species, ranging across all continents except
-                      Antarctica
+                      Population:{" "}
+                      {new Intl.NumberFormat("en-US").format(
+                        country.population
+                      )}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Region: {country.region}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Capital: {country.capital}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -72,23 +70,6 @@ const CountryList: FC<PropTypes> = ({ countries }) => {
           ))}
         </Grid>
       </Box>
-      {/* <ImageList sx={{ width: 500, height: 450 }}>
-        {countries.map((country) => (
-          <ImageListItem key={country.population}>
-            <img
-              src={`${country.flags.png}?w=248&fit=crop&auto=format`}
-              srcSet={`${country.flags.png}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={country.name.common}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              title={country.name.common}
-              subtitle={<span>Population: {country.population}</span>}
-              position="below"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList> */}
     </div>
   );
 };

@@ -7,6 +7,20 @@ async function fetchWithErrorHandling(url = "", config = {}) {
     : Promise.reject(new Error("Not Found"));
 }
 
-export function fetchAll() {
+export function fetchCountries({
+  searchQuery,
+  selectedRegion,
+}: {
+  searchQuery: string;
+  selectedRegion: string;
+}) {
+  if (searchQuery) {
+    return fetchWithErrorHandling(`${BASE_URL}/name/${searchQuery}`);
+  }
+
+  if (selectedRegion) {
+    return fetchWithErrorHandling(`${BASE_URL}/region/${selectedRegion}`);
+  }
+
   return fetchWithErrorHandling(`${BASE_URL}/all`);
 }

@@ -6,6 +6,9 @@ import Navigation from "./components/Navigation";
 const HomePage = lazy(
   () => import("./pages/HomePage" /* webpackChunkName: "home-page"*/)
 );
+const DetailPage = lazy(
+  () => import("./pages/DetailPage" /* webpackChunkName: "detail-page"*/)
+);
 
 function App() {
   return (
@@ -17,7 +20,7 @@ function App() {
             <HomePage />
           </Route>
           <Route path="/detail">
-            <h1>It`s Detail Page</h1>
+            <DetailPage />
           </Route>
         </Switch>
       </Suspense>
