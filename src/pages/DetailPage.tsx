@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Container } from "@mui/material";
-import Loader from "react-loader-spinner";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import * as restCountriesAPI from "../services/rest-countries-api";
-import CountryList from "../components/CountryList";
-import SearchInput from "../components/SearchInput";
-import FilterByRegion from "../components/FilterByRegion";
+import CountryDetail from "../components/CountryDetail";
 
 const Status = {
   IDLE: "idle",
@@ -16,18 +14,18 @@ const Status = {
 
 export default function DetailPage() {
   const location = useLocation();
-  console.log(location);
+
   const [countries, setCountries] = useState([]);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedRegion, setSelectedRegion] = useState("");
 
   useEffect(() => {
     setStatus(Status.PENDING);
 
     restCountriesAPI
-      .fetchCountries({ searchQuery, selectedRegion })
+      .fetchCountries({
+        countryCodes: location.state.countryCode,
+      })
       .then((countries) => {
         setCountries(countries);
         setStatus(Status.RESOLVED);
@@ -36,20 +34,21 @@ export default function DetailPage() {
         setError(error);
         setStatus(Status.REJECTED);
       });
-  }, [selectedRegion, searchQuery]);
+  }, [location.state.countryCode]);
 
   return (
     <section>
-      <h1>It`s Detail Page</h1>
       <Container>
-        <SearchInput onSubmit={setSearchQuery} />
-        <FilterByRegion setSelectedRegion={setSelectedRegion} />
+        <Link to={location?.state?.from ?? "/"} className="goBackLink">
+          <AiOutlineArrowLeft className="goBackIcon" />
+          Back
+        </Link>
 
         {status === Status.REJECTED && <p>{error}</p>}
 
         {status === Status.PENDING && <p>Loading...</p>}
 
-        {status === Status.RESOLVED && <CountryList countries={countries} />}
+        {status === Status.RESOLVED && <CountryDetail countries={countries} />}
       </Container>
     </section>
   );

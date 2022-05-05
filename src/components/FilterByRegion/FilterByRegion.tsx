@@ -39,7 +39,7 @@ const FilterByRegion: FC<PropTypes> = ({ setSelectedRegion }) => {
         inputProps={{ "aria-label": "Without label" }}
       >
         <MenuItem value="Africa">Africa</MenuItem>
-        <MenuItem value="America">America</MenuItem>
+        <MenuItem value="Americas">America</MenuItem>
         <MenuItem value="Asia">Asia</MenuItem>
         <MenuItem value="Europe">Europe</MenuItem>
         <MenuItem value="Oceania">Oceania</MenuItem>

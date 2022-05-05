@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "@mui/material";
-import Loader from "react-loader-spinner";
 import * as restCountriesAPI from "../services/rest-countries-api";
 import CountryList from "../components/CountryList";
 import SearchInput from "../components/SearchInput";

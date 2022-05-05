@@ -9,3 +9,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.goBackLink {
+  text-decoration: none;
+
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 22px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
+
+  color: #212121;
+  background-color: #d9dd92;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
+}
+
+.goBackIcon {
+  margin-right: 8px;
+}
