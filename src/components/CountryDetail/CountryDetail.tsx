@@ -1,18 +1,12 @@
 import React, { FC, useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
 import {
   Box,
   Paper,
   Grid,
   ButtonGroup,
   Button,
-  Stack,
-  Card,
-  CardContent,
-  CardMedia,
   Typography,
 } from "@mui/material";
-
 import { styled } from "@mui/material/styles";
 import * as restCountriesAPI from "../../services/rest-countries-api";
 
@@ -50,11 +44,7 @@ type Country = {
   subregion: string;
   capital: Array<string>;
   tld: Array<string>;
-  currencies: {
-    EUR: {
-      name: string;
-    };
-  };
+  currencies: { EUR: { name: string } };
   languages: {};
   borders: Array<string>;
   nativeName: string;
@@ -140,9 +130,13 @@ const CountryDetail: FC<PropTypes> = ({ countries }) => {
                     variant="contained"
                     aria-label="outlined primary button group"
                   >
-                    <Button>One</Button>
-                    <Button>Two</Button>
-                    <Button>Three</Button>
+                    {borderCountries.map(
+                      (country: { name: { common: string } }) => (
+                        <Button key={country.name.common}>
+                          {country.name.common}
+                        </Button>
+                      )
+                    )}
                   </ButtonGroup>
                 )}
               </Grid>

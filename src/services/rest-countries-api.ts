@@ -1,4 +1,4 @@
-const BASE_URL = "https://restcountries.com/v2";
+const BASE_URL = "https://restcountries.com/v3.1";
 
 async function fetchWithErrorHandling(url = "", config = {}) {
   const response = await fetch(url, config);

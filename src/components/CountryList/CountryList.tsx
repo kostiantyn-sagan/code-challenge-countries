@@ -15,7 +15,7 @@ type Country = {
   flags: {
     png: string;
   };
-  name: string;
+  name: { common: string };
   region: string;
   cca3: string;
   capital: Array<string>;
@@ -32,7 +32,7 @@ const CountryList: FC<PropTypes> = ({ countries }) => {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           {countries.map((country) => (
-            <Grid item xs={3} key={country.name}>
+            <Grid item xs={3} key={country.name.common}>
               <Link
                 to={{
                   pathname: "/detail",
@@ -41,15 +41,14 @@ const CountryList: FC<PropTypes> = ({ countries }) => {
               >
                 <Card sx={{ maxWidth: 345 }}>
                   <CardMedia
-                    // sx={{ objectFit: "contain" }}
                     component="img"
                     height="160"
                     image={country.flags.png}
-                    alt={country.name}
+                    alt={country.name.common}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      {country.name}
+                      {country.name.common}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Population:{" "}
